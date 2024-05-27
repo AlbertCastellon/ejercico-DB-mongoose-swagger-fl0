@@ -3,7 +3,7 @@ const router = express.Router();
 const Task = require("../models/Task.js");
 
 //CREATE TASK
-router.post("/create", async(req, res) => {
+router.post("/api-docs/create", async(req, res) => {
     try {
         const task = await Task.create({...req.body, completed: false });
         res.status(201).send({ message: "Task successfully created", task });
@@ -17,7 +17,7 @@ router.post("/create", async(req, res) => {
 
 //GET TASKS
 
-router.get("/", async(req, res) => {
+router.get("/api-docs/", async(req, res) => {
     try {
         const tasks = await Task.find();
         res.send(tasks);
@@ -28,7 +28,7 @@ router.get("/", async(req, res) => {
 
 //GET TASK BY ID
 
-router.get("/id/:_id", async(req, res) => {
+router.get("/api-docs/id/:_id", async(req, res) => {
     try {
         const task = await Task.findById(req.params._id);
         res.send(task);
@@ -43,7 +43,7 @@ router.get("/id/:_id", async(req, res) => {
 
 //MARK TASK AS COMPLETED (en este endpoint no le permitimos que edite el titulo)
 
-router.put("/markAsCompleted/:_id", async(req, res) => {
+router.put("/api-docs/markAsCompleted/:_id", async(req, res) => {
         try {
             const task = await Task.findByIdAndUpdate(
                 req.params._id, {
@@ -62,7 +62,7 @@ router.put("/markAsCompleted/:_id", async(req, res) => {
 
     //UPDATE TASK
 
-    router.put("/id/:_id", async(req, res) => {
+    router.put("/api-docs/id/:_id", async(req, res) => {
         try {
             const task = await Task.findByIdAndUpdate(req.params._id, req.body, { new: true })
             res.send({ message: "task successfully updated", task });
@@ -73,7 +73,7 @@ router.put("/markAsCompleted/:_id", async(req, res) => {
 
     //DELETE TASK
 
-    router.delete("/id/:_id", async(req, res) => {
+    router.delete("/api-docs/id/:_id", async(req, res) => {
         try {
             const task = await Task.findByIdAndDelete(req.params._id);
             res.send({ message: "task deleted", task });
